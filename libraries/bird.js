@@ -29,9 +29,9 @@ function Bird(game) {
         let img2 = new Image();
         let img3 = new Image();
 
-        img1.src = "../images/yellowbird-upflap.png";
-        img2.src = "../images/yellowbird-midflap.png";
-        img3.src = "../images/yellowbird-downflap.png";
+        img1.src = "./images/yellowbird-upflap.png";
+        img2.src = "./images/yellowbird-midflap.png";
+        img3.src = "./images/yellowbird-downflap.png";
 
         this.images.push(img1);
         this.images.push(img2);

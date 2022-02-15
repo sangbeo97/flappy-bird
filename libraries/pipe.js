@@ -16,7 +16,7 @@ function Pipe(game) {
 
     this.loadImage = function () {
         this.image = new Image();
-        this.image.src = "../images/pipe-green.png";
+        this.image.src = "./images/pipe-green.png";
     }
 
     this.update = function () {
