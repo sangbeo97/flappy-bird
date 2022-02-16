@@ -1,27 +1,20 @@
 function Bird(game) {
     this.game = game;
-    this.images = [];
-    this.currentImage = null;
-    this.currentFrame = 0;
-    this.flapFrame = 0;
-    this.imageIndex = 0;
-    this.sign = 0;
-    this.width = 0;
-    this.height = 0;
-    this.x = 0;
-    this.y = 0
-    this.speed = 0;
-    this.distance = 0;
-
 
     this.init = function () {
-        this.loadImages();
+        this.images = [];
+        this.currentImage = null;
+        this.currentFrame = 0;
+        this.flapFrame = 16;
+        this.imageIndex = 0;
         this.sign = 1;
         this.width = 34;
         this.height = 24;
-        this.flapFrame = 16;
         this.x = 75;
         this.y = this.game.height / 2 - 24;
+        this.speed = 0;
+        this.distance = 0;
+        this.loadImages();
     }
 
     this.loadImages = function () {
@@ -29,9 +22,9 @@ function Bird(game) {
         let img2 = new Image();
         let img3 = new Image();
 
-        img1.src = "./images/yellowbird-upflap.png";
-        img2.src = "./images/yellowbird-midflap.png";
-        img3.src = "./images/yellowbird-downflap.png";
+        img1.src = "./assets/images/yellowbird-upflap.png";
+        img2.src = "./assets/images/yellowbird-midflap.png";
+        img3.src = "./assets/images/yellowbird-downflap.png";
 
         this.images.push(img1);
         this.images.push(img2);
@@ -74,13 +67,35 @@ function Bird(game) {
     this.onClick = function () {
         if (this.game.over)
             return;
+
+        // Fly up speed and distance
         this.distance = -14;
-        this.speed = 2;
+        this.speed = 1.5;
+
+        // Flap faster when fly up
         this.flapFrame = 1;
+    }
+    this.checkHitPipe = function () {
+        let birdLeft = this.x;
+        let birdRight = this.x + this.width;
+        let birdTop = this.y;
+        let birdBot = this.y + this.height;
+        let pipeLeft = this.game.pipe.x;
+        let pipeRight = this.game.pipe.x + this.game.pipe.width;
+        let topPipeBot = this.game.pipe.y - this.game.pipe.pipeGap;
+        let botPipeTop = this.game.pipe.y;
+
+        if ((birdRight >= pipeLeft && birdRight <= pipeRight)
+            || (birdLeft >= pipeLeft && birdLeft <= pipeRight))
+            if (birdTop <= topPipeBot || birdBot >= botPipeTop)
+                this.game.over = true;
     }
 
     this.update = function () {
+        this.checkHitPipe();
         this.fly();
+        if (this.y + this.height >= this.game.height - this.game.base.height)
+            this.game.over = true;
         if (this.game.over) {
             this.currentImage = this.images[1];
             return;

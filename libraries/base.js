@@ -1,16 +1,13 @@
 function Base(game) {
-    this.game = game;
-    this.image = null;
-    this.width = 0;
-    this.height = 0;
-    this.x = 0;
-    this.y = 0;
-
-    this.init = function () {
-        this.loadImage();
+        this.game = game;
         this.width = 336;
         this.height = 112;
+
+    this.init = function () {
+        this.x = 0;
         this.y = this.game.height - this.height;
+        this.image = null;
+        this.loadImage();
     }
 
     this.update = function () {
@@ -23,7 +20,7 @@ function Base(game) {
     }
     this.loadImage = function () {
         this.image = new Image();
-        this.image.src = "./images/base.png";
+        this.image.src = "./assets/images/base.png";
     }
 
     this.draw = function () {

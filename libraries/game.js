@@ -1,22 +1,16 @@
 function Game() {
-    this.canvas = null;
-    this.context = null;
     this.width = 288;
     this.height = 512;
-    this.bird = null;
-    this.pipe = null;
-    this.base = null;
-    this.background = null;
-    this.over = false;
 
     this.init = function () {
-
         /* Create canvas and add to html body */
         this.canvas = document.createElement("canvas");
         this.context = this.canvas.getContext("2d");
         this.canvas.width = this.width;
         this.canvas.height = this.height;
         document.body.appendChild(this.canvas);
+
+        this.over = false;
 
         /* Create background */
         this.background = new Background(this);
@@ -34,52 +28,41 @@ function Game() {
         this.bird = new Bird(this);
         this.bird.init();
 
-        /* Events loop */
-        this.mouseClick();
+        /* Create point */
+        this.point = new Point(this);
+        this.point.init();
 
+        this.gameOver = new GameOver(this);
+        this.gameOver.init();
+
+        this.startScreen = new StartScreen(this);
+        this.startScreen.init();
+
+        this.canvas.addEventListener("click", function () {
+            console.log("Clicked");
+            this.playGame();
+        }.bind(this))
+
+        /* Events loop */
         this.loop();
     }
 
-    this.mouseClick = function () {
-        this.canvas.addEventListener("click", function () {
-            this.bird.onClick();
-        }.bind(this));
-    }
-
-    // this.gameOver = function () {
-    //     if (this.overk)
-    // }
-
     document.addEventListener("keyup", function (event) {
         console.log(event.code);
-        if (event.code === "ArrowUp" || event.code === "Space")
-            this.bird.onClick();
+        if (event.code === "ArrowUp" || event.code === "Space") {
+            this.playGame();
+        }
     }.bind(this));
 
-    this.checkHitPipe = function () {
-        let birdLeft = this.bird.x;
-        let birdRight = this.bird.x + this.bird.width;
-        let birdTop = this.bird.y;
-        let birdBot = this.bird.y + this.bird.height;
-        let pipeLeft = this.pipe.x;
-        let pipeRight = this.pipe.x + this.pipe.width;
-        let topPipeBot = this.pipe.y - 120;
-        let botPipeTop = this.pipe.y;
-
-        if ((birdRight >= pipeLeft && birdRight <= pipeRight)
-            || (birdLeft >= pipeLeft && birdLeft <= pipeRight))
-            if (birdTop <= topPipeBot || birdBot >= botPipeTop)
-                this.over = true;
+    this.playGame = function () {
+        this.bird.onClick();
     }
 
     this.update = function () {
-        if (this.bird.y + this.bird.height == this.height - this.base.height)
-            this.over = true;
-        // this.background.update();
+        this.bird.update();
         this.pipe.update();
         this.base.update();
-        this.bird.update();
-        this.checkHitPipe();
+        this.point.update();
     }
 
     this.draw = function () {
@@ -87,12 +70,22 @@ function Game() {
         this.pipe.draw();
         this.base.draw()
         this.bird.draw();
+        this.point.draw();
     }
 
     this.loop = function () {
         this.update();
         this.draw();
         setTimeout(this.loop.bind(this), 16);
+    }
+
+    this.reset = function () {
+        this.bird.init();
+        this.pipe.init();
+        this.point.init();
+        this.gameOver.show = false;
+        this.over = false;
+        this.play = false;
     }
 }
 

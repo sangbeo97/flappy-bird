@@ -1,31 +1,39 @@
 function Pipe(game) {
     this.game = game;
-    this.image = null;
-    this.width = 0;
-    this.height = 0;
-    this.x = 0;
-    this.y = 0;
+    this.width = 52;
+    this.height = 320;
 
     this.init = function () {
-        this.width = 52;
-        this.height = 320;
         this.x = this.game.width;
-        this.y = this.height;
+        this.y = this.randomPipe();;
+        this.pipeGap = 150;
+        this.pipeUp = null;
+        this.pipeDown = null;
         this.loadImage();
     }
 
     this.loadImage = function () {
-        this.image = new Image();
-        this.image.src = "./images/pipe-green.png";
+        this.pipeUp = new Image();
+        this.pipeDown = new Image();
+        this.pipeUp.src = "./assets/images/pipe-green-up.png";
+        this.pipeDown.src = "./assets/images/pipe-green-down.png";
+    }
+
+    this.randomPipe = function () {
+        let max = this.game.height - (this.height / 2);
+        let min = 0 + (this.height / 2)
+        return Math.floor(Math.random() * (max - min) + min);
     }
 
     this.update = function () {
         if (this.game.over)
             return;
         this.x -= 3;
-        if (this.x <= -this.width) {
+
+        /* Redraw pipe */
+        if (this.x <= -this.width || this.x == this.game.width && this.y == this.game.height) {
             this.x = this.game.width;
-            this.y = Math.floor(Math.random() * (320 - 120) + 120);
+            this.y = this.randomPipe();
         }
     }
 
@@ -33,12 +41,12 @@ function Pipe(game) {
         let botPipeX = this.x;
         let botPipeY = this.y;
         let topPipeX = this.x;
-        let topPipeY = botPipeY - this.height - 120;
+        let topPipeY = botPipeY - this.height - this.pipeGap;
 
         /* First pipe */
-        // Bot pipe
-        this.game.context.drawImage(this.image, botPipeX, botPipeY);
-        // Top pipe
-        this.game.context.drawImage(this.image, topPipeX, topPipeY);
+        // Pipe up
+        this.game.context.drawImage(this.pipeUp, botPipeX, botPipeY);
+        // Pipe down
+        this.game.context.drawImage(this.pipeDown, topPipeX, topPipeY);
     }
 }
