@@ -6,7 +6,7 @@ function Pipe(game) {
     this.init = function () {
         this.x = this.game.width;
         this.y = this.randomPipe();;
-        this.pipeGap = 120;
+        this.pipeGap = 111;
         this.pipeUp = null;
         this.pipeDown = null;
         this.loadImage();

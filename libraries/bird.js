@@ -59,7 +59,7 @@ function Bird(game) {
         }
         // If bird fall, reduce speed
         if (this.distance >= 0) {
-            this.speed = 0.25;
+            this.speed = 0.23;
 
             // Flap slower when falling down
             if (this.currentFrame % 4 == 0)
@@ -75,8 +75,8 @@ function Bird(game) {
             return;
 
         // Fly up speed and distance
-        this.distance = -14;
-        this.speed = 1.5;
+        this.distance = -13.2;
+        this.speed = 1.2;
 
         // Flap faster when fly up
         this.flapFrame = 1;
