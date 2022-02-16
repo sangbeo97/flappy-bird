@@ -5,7 +5,7 @@ function StartScreen(game) {
 
     this.init = function () {
         this.x = (this.game.width / 2) - (this.width / 2);
-        this.y = (this.game.height / 2) - (this.height / 2);
+        this.y = (this.game.height / 2) - (this.height / 2) - 50;
         this.image = null;
         this.show = true;
         this.loadImage();
@@ -17,10 +17,10 @@ function StartScreen(game) {
     }
 
     this.update = function () {
-        if (this.game.over && !this.game.gameOver.show)
-            this.show = true;
-        else
+        if (this.game.start)
             this.show = false;
+        else
+            this.show = true;
     }
 
     this.draw = function () {

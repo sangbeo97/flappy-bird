@@ -43,6 +43,8 @@ function Bird(game) {
 
     // Flap per millisecond
     this.flap = function () {
+        if (!this.game.start)
+            this.flapFrame = 9;
         if (this.currentFrame % this.flapFrame == 0)
             this.changeImage();
         this.currentFrame++;
@@ -51,9 +53,13 @@ function Bird(game) {
     }
 
     this.fly = function () {
+        if (!this.game.start) {
+            this.y = this.game.height / 2;
+            return
+        }
         // If bird fall, reduce speed
         if (this.distance >= 0) {
-            this.speed = 0.3;
+            this.speed = 0.25;
 
             // Flap slower when falling down
             if (this.currentFrame % 4 == 0)
@@ -92,7 +98,6 @@ function Bird(game) {
     }
 
     this.update = function () {
-        this.checkHitPipe();
         this.fly();
         if (this.y + this.height >= this.game.height - this.game.base.height)
             this.game.over = true;
@@ -100,6 +105,7 @@ function Bird(game) {
             this.currentImage = this.images[1];
             return;
         }
+        this.checkHitPipe();
         this.flap();
     }
 

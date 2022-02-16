@@ -11,6 +11,7 @@ function Game() {
         document.body.appendChild(this.canvas);
 
         this.over = false;
+        this.start = false;
 
         /* Create background */
         this.background = new Background(this);
@@ -40,7 +41,7 @@ function Game() {
 
         this.canvas.addEventListener("click", function () {
             console.log("Clicked");
-            this.playGame();
+            this.play();
         }.bind(this))
 
         /* Events loop */
@@ -50,27 +51,33 @@ function Game() {
     document.addEventListener("keyup", function (event) {
         console.log(event.code);
         if (event.code === "ArrowUp" || event.code === "Space") {
-            this.playGame();
+            this.play();
         }
     }.bind(this));
 
-    this.playGame = function () {
+    this.play = function () {
+        if (!this.start && this.startScreen.show)
+            this.start = true;
         this.bird.onClick();
     }
 
     this.update = function () {
-        this.bird.update();
         this.pipe.update();
         this.base.update();
         this.point.update();
+        this.bird.update();
+        this.startScreen.update();
+        this.gameOver.update();
     }
 
     this.draw = function () {
         this.background.draw();
         this.pipe.draw();
         this.base.draw()
-        this.bird.draw();
         this.point.draw();
+        this.bird.draw();
+        this.startScreen.draw();
+        this.gameOver.draw();
     }
 
     this.loop = function () {
@@ -83,9 +90,6 @@ function Game() {
         this.bird.init();
         this.pipe.init();
         this.point.init();
-        this.gameOver.show = false;
-        this.over = false;
-        this.play = false;
     }
 }
 

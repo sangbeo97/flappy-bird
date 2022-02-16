@@ -4,8 +4,8 @@ function Point(game) {
     this.height = 36;
 
     this.init = function () {
-        this.x = this.game.width / 2;
-        this.y = 10;
+        this.x = (this.game.width / 2) - (this.width / 2);
+        this.y = 20;
         this.imgIndex = 0;
         this.images = [];
         this.currentImage = null;
@@ -21,6 +21,8 @@ function Point(game) {
     }
 
     this.update = function () {
+        if (this.game.over)
+            return;
         this.currentImage = this.images[this.imgIndex % 10];
         if (this.game.bird.x == this.game.pipe.x)
             this.imgIndex++;

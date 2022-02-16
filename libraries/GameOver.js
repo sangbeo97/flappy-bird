@@ -5,7 +5,8 @@ function GameOver(game) {
 
     this.init = function () {
         this.x = this.game.width / 2 - (this.width / 2);
-        this.y = this.game.height / 2 - this.height;
+        this.y = 150;
+        this.count = 0;
         this.show = false;
         this.image = null;
         this.loadImage();
@@ -17,7 +18,19 @@ function GameOver(game) {
     }
 
     this.update = function () {
-        
+        if (this.game.bird.y + this.game.bird.height >= this.game.height - this.game.base.height) {
+            this.show = true;
+            if (this.count != 0)
+                return;
+            this.count++;
+            setTimeout(function () {
+                this.count = 0;
+                this.show = false;
+                this.game.over = false;
+                this.game.start = false;
+                this.game.reset();
+            }.bind(this), 2000);
+        }
     }
 
     this.draw = function () {
