@@ -3,12 +3,12 @@ const express = require("express")
 const app = express()
 
 // use the express-static middleware
-app.use(express.static("./"))
+app.use(express.static("public"))
 
 // define the first route
 app.get("/", function (req, res) {
-    res.send("<h1>Hello World!</h1>")
-})
+    res.sendFile(__dirname + '/index.html');
+});
 
 // start the server listening for requests
 app.listen(process.env.PORT || 3000,

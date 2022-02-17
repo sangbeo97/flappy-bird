@@ -20,7 +20,7 @@ function Base(game) {
     }
     this.loadImage = function () {
         this.image = new Image();
-        this.image.src = "./assets/images/base.png";
+        this.image.src = "../assets/images/base.png";
     }
 
     this.draw = function () {

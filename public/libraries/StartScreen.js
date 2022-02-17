@@ -13,7 +13,7 @@ function StartScreen(game) {
 
     this.loadImage = function () {
         this.image = new Image();
-        this.image.src = "./assets/images/message.png";
+        this.image.src = "../assets/images/message.png";
     }
 
     this.update = function () {

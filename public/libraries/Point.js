@@ -15,7 +15,7 @@ function Point(game) {
     this.loadImage = function () {
         for (let i = 0; i <= 9; ++i) {
             let img = new Image();
-            img.src = `./assets/images/${i}.png`;
+            img.src = `../assets/images/${i}.png`;
             this.images.push(img);
         }
     }
