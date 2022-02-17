@@ -1,0 +1,23 @@
+{
+  "name": "flappy-bird",
+  "version": "1.0.0",
+  "description": "Assets to develop the Flappy Bird Game\r # flappy-bird",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sangbeoo/flappy-bird.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sangbeoo/flappy-bird/issues"
+  },
+  "homepage": "https://github.com/sangbeoo/flappy-bird#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
