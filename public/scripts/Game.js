@@ -12,11 +12,11 @@ function Game() {
 
         this.over = false;
         this.start = false;
-        this.dieSound = new Audio("../assets/audio/die.ogg");
-        this.hitSound = new Audio("../assets/audio/hit.ogg");
-        this.pointSound = new Audio("../assets/audio/point.ogg");
-        this.swooshSound = new Audio("../assets/audio/swoosh.ogg");
-        this.wingSound = new Audio("../assets/audio/wing.ogg");
+        this.dieSound = new Audio("../audio/die.ogg");
+        this.hitSound = new Audio("../audio/hit.ogg");
+        this.pointSound = new Audio("../audio/point.ogg");
+        this.swooshSound = new Audio("../audio/swoosh.ogg");
+        this.wingSound = new Audio("../audio/wing.ogg");
 
         /* Create background */
         this.background = new Background(this);

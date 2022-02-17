@@ -15,8 +15,8 @@ function Pipe(game) {
     this.loadImage = function () {
         this.pipeUp = new Image();
         this.pipeDown = new Image();
-        this.pipeUp.src = "../assets/images/pipe-green-up.png";
-        this.pipeDown.src = "../assets/images/pipe-green-down.png";
+        this.pipeUp.src = "../images/pipe-green-up.png";
+        this.pipeDown.src = "../images/pipe-green-down.png";
     }
 
     this.randomPipe = function () {

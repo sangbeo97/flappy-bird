@@ -14,7 +14,7 @@ function GameOver(game) {
 
     this.loadImage = function () {
         this.image = new Image();
-        this.image.src = "../assets/images/gameover.png";
+        this.image.src = "../images/gameover.png";
     }
 
     this.update = function () {

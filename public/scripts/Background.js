@@ -10,7 +10,7 @@ function Background(game) {
 
     this.loadImage = function () {
         this.image = new Image();
-        this.image.src = "../assets/images/background-day.png";
+        this.image.src = "../images/background-day.png";
     }
 
     this.update = function () {
