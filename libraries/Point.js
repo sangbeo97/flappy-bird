@@ -24,8 +24,10 @@ function Point(game) {
         if (this.game.over)
             return;
         this.currentImage = this.images[this.imgIndex % 10];
-        if (this.game.bird.x == this.game.pipe.x)
+        if (this.game.bird.x == this.game.pipe.x) {
+            this.game.pointSound.play();
             this.imgIndex++;
+        }
     }
 
     this.draw = function () {

@@ -59,7 +59,7 @@ function Bird(game) {
         }
         // If bird fall, reduce speed
         if (this.distance >= 0) {
-            this.speed = 0.23;
+            this.speed = 0.21;
 
             // Flap slower when falling down
             if (this.currentFrame % 4 == 0)
@@ -74,9 +74,10 @@ function Bird(game) {
         if (this.game.over)
             return;
 
+        this.game.wingSound.play();
         // Fly up speed and distance
-        this.distance = -13.2;
-        this.speed = 1.2;
+        this.distance = -12.1;
+        this.speed = 1.1;
 
         // Flap faster when fly up
         this.flapFrame = 1;
@@ -93,20 +94,33 @@ function Bird(game) {
 
         if ((birdRight >= pipeLeft && birdRight <= pipeRight)
             || (birdLeft >= pipeLeft && birdLeft <= pipeRight))
-            if (birdTop <= topPipeBot || birdBot >= botPipeTop)
+            if (birdTop <= topPipeBot || birdBot >= botPipeTop) {
+                this.game.hitSound.play();
+                setTimeout(function () {
+                    this.game.dieSound.play();
+                }.bind(this), 100);
                 this.game.over = true;
+            }
     }
 
+    // this.checkHitGround = function () {
+    // }
+    
     this.update = function () {
         this.fly();
-        if (this.y + this.height >= this.game.height - this.game.base.height)
+        // this.checkHitGround();
+        if (this.y + this.height >= this.game.height - this.game.base.height) {
+            if (this.game.over)
+                return;
+            this.game.hitSound.play();
             this.game.over = true;
+        }
         if (this.game.over) {
             this.currentImage = this.images[1];
             return;
         }
-        this.checkHitPipe();
         this.flap();
+        this.checkHitPipe();
     }
 
     this.draw = function () {

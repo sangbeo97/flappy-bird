@@ -12,6 +12,13 @@ function Game() {
 
         this.over = false;
         this.start = false;
+        this.dieSound = new Audio("./assets/audio/die.ogg");
+        this.hitSound = new Audio("./assets/audio/hit.ogg");
+        this.pointSound = new Audio("./assets/audio/point.ogg");
+        this.swooshSound = new Audio("./assets/audio/swoosh.ogg");
+        this.wingSound = new Audio("./assets/audio/wing.ogg");
+        this.wingSound.preload = "auto";
+        this.wingSound.buffered;
 
         /* Create background */
         this.background = new Background(this);
@@ -43,6 +50,7 @@ function Game() {
             console.log("Clicked");
             this.play();
         }.bind(this))
+
 
         /* Events loop */
         this.loop();
@@ -87,13 +95,14 @@ function Game() {
     }
 
     this.reset = function () {
+        this.swooshSound.play();
         this.bird.init();
         this.pipe.init();
         this.point.init();
     }
 }
 
-let game = new Game();
+const game = new Game();
 game.init();
 
 game.canvas.style.display = "block";

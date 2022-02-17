@@ -19,13 +19,15 @@ function StartScreen(game) {
     this.update = function () {
         if (this.game.start)
             this.show = false;
-        else
+        else {
             this.show = true;
+        }
     }
-
+    
     this.draw = function () {
-        if (this.show)
+        if (this.show) {
             this.game.context.drawImage(this.image, this.x, this.y);
+        }
     }
 
 }
